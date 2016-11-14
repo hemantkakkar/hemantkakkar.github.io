@@ -1,3 +1,42 @@
+#Project 4 - Web Optimization
+
+##Solution Steps
+###Part I - PageSpeed Insights get >= 90 score
+####What was done ?
+
+    *Add google font in script
+    *Used loasCSS() property
+    *Excluded print.css from CRP (adding media="print")
+    *Added async calls for scripts (perfmatters.js, analytics.js)
+    *Optimized images (compress, resize)
+	*minimized all css files
+
+
+###Part II - 60 FPS
+####What was done ?
+
+    *updatePositions() (Line 489) - moved reference to document scrollTop property out of the loop, to stop forcing layout recalculation on each loop iteration
+    *Descreased amout of generated pizzas
+    *Optimized pizza img (compressed, resized)
+    *style.css - added translateZ(0) property to pizzas, to force browser create new layer for each. Improved Paint performance
+	*calculate no of pizzas ((line 521))
+	
+####Optimizations:####
+
+Changes made in views/js/main.js:
+
+1. Replaced all `querySelectorAll` with `getElementsByClassName` for a more specific and time-saving query
+2. Refactored the function `changePizzaSizes` following Cameron's advice in Browser Rendering Optimization class.
+3. Refactored the function `updatePositions` by taking the `var scrollPosition` out of the loop, changed var phase using the var scrollPosition.
+4. For the function `addEventListener` (lines 522-547), created `var movingPizzas` and put it outside the loop.
+6. In 'changeSliderLabel' function, replaced all 'querySelector' with 'getElementById'.
+7. line 443: for the 'randomPizzas' loop created var for the array length, so that the array's length property is not accessed to check its value at each iteration
+8. line 510: for 'scrollPosition' loop, put both vars 'len' and 'phase' inside the loop initialization so that they are not checked at each iteration.
+9. line 521: In the sliding pizzas for loop, per reviewer's suggestion, changed the number of sliding pizzas from 200 to 24.  Also placed the var 'elem' in the loop initialization for efficiency
+
+Changes made in views/css/style.css:
+1. increased the site performance with hardware accelerated CSS by including `transform: translateZ(0);` declaration to trigger the GPU.
+
 ## Website Performance Optimization portfolio project
 
 Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
