@@ -35,6 +35,7 @@ form {
   z-index: -1;
   /* added the following*/
   transform: translateZ(0);
+  -webkit-transform: translateZ(0);
   will-change: transform;
   transform: translate3d(0,0,0);
   backface-visibility: hidden;
